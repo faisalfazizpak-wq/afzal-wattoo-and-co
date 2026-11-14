@@ -157,7 +157,7 @@ html.no-pre #preloader{display:none!important;animation:none}
 .xcard h3{font-size:1.7rem;margin:7px 0 6px}
 .xcard p{color:var(--muted);margin:0 0 12px;font-size:.95rem;max-width:420px}
 .xcard .x-go{font-weight:800;color:#0A2A6B;font-size:.9rem;letter-spacing:.05em;border-bottom:2px solid #0A2A6B;padding-bottom:2px}
-.band{position:relative;border-block:1px solid var(--line-soft);background-position:88% 42%;background-size:cover;background-repeat:no-repeat}
+.band{position:relative;border-block:1px solid var(--line-soft);background-position:100% 42%;background-size:cover;background-repeat:no-repeat}
 .band::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.96) 30%,rgba(255,255,255,.78))}
 .band .wrap{position:relative;padding:76px 20px}
 .band h2{font-size:clamp(1.9rem,5vw,3rem);max-width:560px}
