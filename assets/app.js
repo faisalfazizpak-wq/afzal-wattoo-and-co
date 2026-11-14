@@ -206,18 +206,50 @@
   }
   syncTabs(); setExplorer("5"); setCalc("5", false);
 
-  /* ---------- Hero 3D tilt ---------- */
+  /* ---------- Hero 3D tilt (smooth rAF engine) ---------- */
   var tilt = document.getElementById("tilt");
-  if(tilt && window.matchMedia("(pointer: fine)").matches && !reduced){
-    var hero = document.querySelector(".hero");
-    hero.addEventListener("pointermove", function(e){
-      var r = tilt.getBoundingClientRect();
-      var x = (e.clientX - (r.left + r.width/2)) / r.width;
-      var y = (e.clientY - (r.top + r.height/2)) / r.height;
-      tilt.style.transform = "rotateY(" + (x*9).toFixed(2) + "deg) rotateX(" + (-y*7).toFixed(2) + "deg)";
-    });
-    hero.addEventListener("pointerleave", function(){ tilt.style.transform = "rotateY(0deg) rotateX(0deg)"; });
-    tilt.style.transition = "transform .35s ease-out";
+  if(tilt && !reduced){
+    var heroSec = document.querySelector(".hero");
+    var finePointer = window.matchMedia("(pointer: fine)").matches;
+    var tX = 0, tY = 0, cX = 0, cY = 0;        /* target / current tilt, degrees */
+    var sX = 50, sY = 50, scX = 50, scY = 50;  /* sheen position, % */
+    var hovering = false, lastMove = 0;
+    tilt.style.transition = "none";
+    function tiltLoop(now){
+      /* Gentle idle sway once the pointer has been still for ~2.6s */
+      var idle = !hovering || (now - lastMove > 2600);
+      var gx = idle ? Math.sin(now * .00045) * 3.2 : tX;
+      var gy = idle ? Math.cos(now * .00038) * 2.4 : tY;
+      cX += (gx - cX) * .065;
+      cY += (gy - cY) * .065;
+      scX += (sX - scX) * .09;
+      scY += (sY - scY) * .09;
+      tilt.style.transform = "rotateY(" + cX.toFixed(2) + "deg) rotateX(" + cY.toFixed(2) + "deg)";
+      tilt.style.setProperty("--sx", scX.toFixed(1) + "%");
+      tilt.style.setProperty("--sy", scY.toFixed(1) + "%");
+      tilt.style.boxShadow = (-cX * 2.4).toFixed(1) + "px " + (30 + cY * 2.2).toFixed(1) + "px 60px -18px rgba(10,42,107,.38)";
+      requestAnimationFrame(tiltLoop);
+    }
+    if(finePointer && heroSec){
+      heroSec.addEventListener("pointermove", function(e){
+        var r = tilt.getBoundingClientRect();
+        if(!r.width) return;
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        var cx = Math.max(-1, Math.min(1, (px - .5) * 2));
+        var cy = Math.max(-1, Math.min(1, (py - .5) * 2));
+        tX = cx * 11;          /* rotateY clamped to +/-11 deg */
+        tY = -cy * 8.5;        /* rotateX clamped to +/-8.5 deg */
+        sX = px * 100; sY = py * 100;
+        hovering = true; lastMove = performance.now();
+        tilt.classList.add("tilting");
+      });
+      heroSec.addEventListener("pointerleave", function(){
+        hovering = false; tX = 0; tY = 0;
+        tilt.classList.remove("tilting");
+      });
+    }
+    requestAnimationFrame(tiltLoop);
   }
 
   /* ---------- Gold dust canvas ---------- */
