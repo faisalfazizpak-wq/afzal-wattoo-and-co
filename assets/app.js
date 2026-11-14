@@ -60,15 +60,36 @@
       document.querySelectorAll(".hero h1 .w").forEach(function(w){ w.style.opacity=1; w.style.transform="none"; });
     }
   }
-  window.addEventListener("load", function(){
-    setTimeout(function(){
-      document.getElementById("preloader").classList.add("done");
-      playHero();
-      setTimeout(function(){ document.getElementById("wa-tip").classList.add("show"); }, 2600);
-      setTimeout(function(){ document.getElementById("wa-tip").classList.remove("show"); }, 9000);
-    }, reduced ? 60 : 1150);
-  });
-  setTimeout(function(){ document.getElementById("preloader").classList.add("done"); playHero(); }, 3400);
+  var preDone = false;
+  function dismissPreloader(){
+    if(preDone) return; preDone = true;
+    var pl = document.getElementById("preloader");
+    if(pl) pl.classList.add("done");
+    playHero();
+  }
+  function tipCycle(){
+    var tip = document.getElementById("wa-tip");
+    if(!tip) return;
+    setTimeout(function(){ tip.classList.add("show"); }, 2600);
+    setTimeout(function(){ tip.classList.remove("show"); }, 9000);
+  }
+  if(document.documentElement.classList.contains("no-pre")){
+    /* Repeat page in this tab session: the inline head script + CSS already
+       hid the preloader, so just run the hero intro and the WhatsApp tip. */
+    dismissPreloader();
+    tipCycle();
+  } else {
+    var armPreloader = function(){
+      setTimeout(function(){ dismissPreloader(); tipCycle(); }, reduced ? 60 : 650);
+    };
+    if(document.readyState === "loading"){
+      document.addEventListener("DOMContentLoaded", armPreloader);
+    } else {
+      armPreloader();
+    }
+    window.addEventListener("load", function(){ setTimeout(dismissPreloader, reduced ? 60 : 650); });
+    setTimeout(dismissPreloader, 2600); /* JS fallback: never leave the preloader stuck */
+  }
 
   /* ---------- Router ---------- */
   var current = null, firstNav = true;
