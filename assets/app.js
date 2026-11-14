@@ -5,10 +5,10 @@
 
   /* ---------- Data ---------- */
   var PLANS = {
-    "5":  { name:"5 Marla",  total:5900000,  marla:5,  dim:"≈ 125 sq. yd · 1,125 sq. ft plot" },
-    "10": { name:"10 Marla", total:10500000, marla:10, dim:"≈ 250 sq. yd · 2,250 sq. ft plot" },
-    "20": { name:"1 Kanal",  total:21000000, marla:20, dim:"≈ 500 sq. yd · 4,500 sq. ft plot" },
-    "40": { name:"2 Kanal",  total:38000000, marla:40, dim:"≈ 1,000 sq. yd · 9,000 sq. ft plot" }
+    "5":  { name:"5 Marla",  total:6200000,  marla:5,  dim:"≈ 125 sq. yd · 1,125 sq. ft plot" },
+    "10": { name:"10 Marla", total:11000000, marla:10, dim:"≈ 250 sq. yd · 2,250 sq. ft plot" },
+    "20": { name:"1 Kanal",  total:20500000, marla:20, dim:"≈ 500 sq. yd · 4,500 sq. ft plot" },
+    "40": { name:"2 Kanal",  total:39000000, marla:40, dim:"≈ 1,000 sq. yd · 9,000 sq. ft plot" }
   };
   function groupPK(n){
     var s = String(Math.round(n)), last = s.slice(-3), rest = s.slice(0,-3);
@@ -205,6 +205,32 @@
       "Hello, I want to book a " + p.name + " plot in Etihad Town Phase 4.\nTotal: " + money(p.total) + "\nBooking (20%): " + money(book) + "\nMonthly: " + money(month) + " x 30\nPlease send me more details.");
   }
   syncTabs(); setExplorer("5"); setCalc("5", false);
+
+
+  /* ---------- Interactive location map ---------- */
+  var mapPins = document.querySelectorAll(".map-pin");
+  if(mapPins.length){
+    var closePins = function(except){
+      mapPins.forEach(function(p){
+        if(p !== except){ p.classList.remove("open"); var b = p.querySelector(".map-dot"); if(b) b.setAttribute("aria-expanded","false"); }
+      });
+    };
+    mapPins.forEach(function(p){
+      var btn = p.querySelector(".map-dot");
+      if(!btn) return;
+      btn.addEventListener("click", function(e){
+        e.stopPropagation();
+        var willOpen = !p.classList.contains("open");
+        closePins(p);
+        p.classList.toggle("open", willOpen);
+        btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+      });
+    });
+    document.addEventListener("click", function(e){
+      if(!e.target.closest(".map-pin")) closePins(null);
+    });
+    document.addEventListener("keydown", function(e){ if(e.key === "Escape") closePins(null); });
+  }
 
   /* ---------- Hero 3D tilt (smooth rAF engine) ---------- */
   var tilt = document.getElementById("tilt");
