@@ -434,3 +434,6 @@ footer h4{font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;color:v
 
 .mono-img{width:44px;height:44px;flex:0 0 44px;object-fit:contain;display:block}
 .seal-mono{width:46px;height:auto;display:block}
+
+.wipe-img{width:84px;height:auto;display:block}
+#preloader .pl-mono{width:104px;height:auto;opacity:0;animation:fadein .8s ease .15s forwards}
