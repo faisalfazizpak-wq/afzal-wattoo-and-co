@@ -412,9 +412,9 @@ footer h4{font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;color:v
 
 /* ---------- Faisal 2026-11-14: gate heroes + home hero Etihad lines ---------- */
 .gate-head{position:relative;background-size:cover;background-position:64% 30%;background-repeat:no-repeat}
-.gate-head::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.68),rgba(255,255,255,.4) 45%,rgba(255,255,255,.78))}
+.gate-head::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.9) 16%,rgba(255,255,255,.52) 52%,rgba(255,255,255,.14))}
 .gate-head .wrap{position:relative}
 .gate-head p{color:#22365E}
 .hero-etihad{color:var(--muted);max-width:520px;margin:12px 0 0}
 .hero-etihad em{color:var(--gold2);font-style:normal;font-weight:800}
-@media (max-width:640px){.gate-head::before{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.82))}.band::before{background:linear-gradient(90deg,rgba(255,255,255,.94) 20%,rgba(255,255,255,.6))}}
+@media (max-width:640px){.gate-head::before{background:linear-gradient(90deg,rgba(255,255,255,.95) 26%,rgba(255,255,255,.8) 62%,rgba(255,255,255,.55))}.band::before{background:linear-gradient(90deg,rgba(255,255,255,.94) 20%,rgba(255,255,255,.6))}}
