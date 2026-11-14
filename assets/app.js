@@ -154,7 +154,7 @@
     document.getElementById("ex-total").textContent = fmt(p.total);
     document.getElementById("ex-book").textContent = fmt(p.total * .20);
     document.getElementById("ex-month").textContent = fmt(p.total * .01);
-    document.getElementById("ex-wa").href = "https://wa.me/" + WA + "?text=" + encodeURIComponent("Mujhe " + p.name + " Phase 4 plot ki booking karni hai. Total " + fmt(p.total) + ", booking " + fmt(p.total*.20) + ".");
+    document.getElementById("ex-wa").href = "https://wa.me/" + WA + "?text=" + encodeURIComponent("I want to book a " + p.name + " plot in Phase 4. Total " + fmt(p.total) + ", booking " + fmt(p.total*.20) + ".");
   }
   function setCalc(size, animate){
     if(!document.getElementById("c-total")) return;
@@ -181,7 +181,7 @@
       document.getElementById("c-check").textContent = money(p.total);
     }
     document.getElementById("c-wa").href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(
-      "Assalam-o-Alaikum, mujhe Etihad Town Phase 4 mein " + p.name + " plot book karna hai.\nTotal: " + money(p.total) + "\nBooking (20%): " + money(book) + "\nMonthly: " + money(month) + " x 30\nMazeed details bhej dein.");
+      "Hello, I want to book a " + p.name + " plot in Etihad Town Phase 4.\nTotal: " + money(p.total) + "\nBooking (20%): " + money(book) + "\nMonthly: " + money(month) + " x 30\nPlease send me more details.");
   }
   syncTabs(); setExplorer("5"); setCalc("5", false);
 
@@ -233,7 +233,7 @@
     var phone = document.getElementById("f-phone").value.trim();
     var size = document.getElementById("f-size").value;
     var msg = document.getElementById("f-msg").value.trim();
-    var text = "Assalam-o-Alaikum, main " + name + " hoon.\nMujhe Etihad Town mein " + size + " mein dilchaspi hai.\nMera number: " + phone + (msg ? "\nMessage: " + msg : "") + "\nMazeed details bhej dein, shukriya.";
+    var text = "Hello, I am " + name + ".\nI am interested in " + size + " in Etihad Town.\nMy number: " + phone + (msg ? "\nMessage: " + msg : "") + "\nPlease send me more details, thank you.";
     window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(text), "_blank", "noopener");
   });
 
