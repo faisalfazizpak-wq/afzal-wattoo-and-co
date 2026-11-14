@@ -444,3 +444,16 @@ footer h4{font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;color:v
 .p5-card h3{font-size:1.25rem;margin:0 0 8px;color:#0A2A6B}
 .p5-card p{color:var(--muted);margin:0;font-size:.95rem}
 @media(max-width:860px){.p5-grid{grid-template-columns:1fr}}
+
+/* Mobile optimization pass */
+html,body{overflow-x:clip}
+@media(max-width:640px){
+  .hero h1{font-size:clamp(2.55rem,13.5vw,3.4rem)}
+  .portrait-seal{width:84px;height:84px;top:-14px;left:-4px}
+  .portrait-seal .seal-mono{width:40px}
+  .hero-stats .lbl{font-size:.68rem}
+  .band{padding:52px 0}
+  .pagehead{padding:44px 0 36px}
+  .foot-grid{gap:28px}
+  .ticker-track span{font-size:.78rem}
+}
