@@ -437,3 +437,10 @@ footer h4{font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;color:v
 
 .wipe-img{width:84px;height:auto;display:block}
 #preloader .pl-mono{width:104px;height:auto;opacity:0;animation:fadein .8s ease .15s forwards}
+
+.soon-plate{display:inline-block;background:#0A2A6B;color:#fff;letter-spacing:.3em;padding:10px 18px;border-radius:999px;font-weight:800;font-size:.75rem;margin-bottom:18px}
+.p5-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.p5-card{border:1px solid var(--line);border-radius:6px;padding:26px;background:#fff}
+.p5-card h3{font-size:1.25rem;margin:0 0 8px;color:#0A2A6B}
+.p5-card p{color:var(--muted);margin:0;font-size:.95rem}
+@media(max-width:860px){.p5-grid{grid-template-columns:1fr}}
